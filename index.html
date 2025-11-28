@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <title>Notion Date Widget</title>
+
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Momo+Trust+Display&display=swap" rel="stylesheet">
+
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: transparent;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-family: 'Momo Trust Display', sans-serif;
+    }
+
+    .widget {
+      width: 550px;
+      height: 200px;              /* ✅ 높이 200px */
+      background-color: white;    /* ✅ 흰색 배경 */
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .date {
+      font-size: 32px;
+      color: #888888;
+      line-height: 1;
+    }
+
+    .time {
+      font-size: 28px;
+      color: #888888;
+      margin-top: 30px;
+      line-height: 1;
+    }
+  </style>
+</head>
+<body>
+  <div class="widget">
+    <div class="date" id="date"></div>
+    <div class="time" id="time"></div>
+  </div>
+
+  <script>
+    function updateDateTime() {
+      const now = new Date();
+
+      const year = now.getFullYear();
+      const month = String(now.getMonth() + 1).padStart(2, "0");
+      const day = String(now.getDate()).padStart(2, "0");
+
+      const days = ["SUN","MON","TUE","WED","THU","FRI","SAT"];
+      const weekday = days[now.getDay()];
+
+      const hour = String(now.getHours()).padStart(2, "0");
+      const minute = String(now.getMinutes()).padStart(2, "0");
+
+      document.getElementById("date").textContent =
+        `${year}. ${month}. ${day} (${weekday})`;
+
+      document.getElementById("time").textContent =
+        `${hour} : ${minute}`;
+    }
+
+    updateDateTime();
+    setInterval(updateDateTime, 1000);
+  </script>
+</body>
+</html>
